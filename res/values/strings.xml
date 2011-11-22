@@ -2,4 +2,5 @@
 <resources>
     <string name="hello">Hello World, WiFiScanning!</string>
     <string name="app_name">SolarFlare</string>
+    <string name="connect_phones">Showing Connected phones</string>
 </resources>
