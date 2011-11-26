@@ -9,7 +9,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 
-public class WiFiScanning extends ListActivity {
+public class WiFiConfigurationActivity extends ListActivity {
 	
 	public static final String EXTRA_SSID_NAME = "SSIDName"; 
 	private ArrayAdapter<String> mAdapter;
@@ -19,7 +19,7 @@ public class WiFiScanning extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		mAdapter = new ArrayAdapter<String>(WiFiScanning.this, android.R.layout.simple_list_item_1);
+		mAdapter = new ArrayAdapter<String>(WiFiConfigurationActivity.this, android.R.layout.simple_list_item_1);
 		setListAdapter(mAdapter);
 	}
 
