@@ -69,7 +69,7 @@ public class WiFiScanning extends Activity {
 						// TODO Auto-generated method stub
 						
 						String SSIDName = arraySSID[(pos-1)];
-						Intent intent = new Intent();
+						Intent intent = new Intent(WiFiScanning.this, ConnectedPhones.class);
 						intent.putExtra("SSIDName", SSIDName);
 						startActivity(intent);
 						
