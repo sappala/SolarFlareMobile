@@ -1,0 +1,13 @@
+.DS_Store
+Thumbs.db
+Desktop.ini
+.metadata
+tmp/**
+tmp/**/*
+*.bak
+*.swp
+*~.nib
+*~
+bin/
+gen/
+local.properties
