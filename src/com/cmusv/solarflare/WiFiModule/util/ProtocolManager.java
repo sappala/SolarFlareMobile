@@ -30,7 +30,7 @@ public class ProtocolManager {
 		object.put(KEY_ACTION, ACTION_CONNECT);
 		object.put(KEY_USERNAME, info.getUserName());
 		object.put(KEY_USERID, info.getUserId());
-		return null;
+		return object;
 	}
 	
 	public static String getMessageAction(JSONObject object) throws JSONException {

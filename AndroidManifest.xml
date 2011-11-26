@@ -10,6 +10,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity android:name=".MessageScreen" android:label="@string/screen_name">
+        </activity>
+        <service android:name=".SolarFlareIntentService" ></service>
+        
+            
+         
     </application>
 	
 	<uses-permission android:name="android.permission.READ_PHONE_STATE"> </uses-permission>

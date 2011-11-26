@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SolarFlare</string>
+    <string name="screen_name">Enter message</string>
     <string name="preconfiguredSSID">"ulala"</string>
 </resources>

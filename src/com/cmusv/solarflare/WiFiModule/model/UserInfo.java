@@ -21,4 +21,23 @@ public class UserInfo {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return userName;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		// TODO Auto-generated method stub
+		
+		if(o instanceof UserInfo)
+			if(userId.equals(((UserInfo) o).userId))
+				return true;
+			
+		return false;
+		
+	}
+	
 }
