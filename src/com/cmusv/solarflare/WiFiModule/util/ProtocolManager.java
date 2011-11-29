@@ -14,9 +14,6 @@ import com.cmusv.solarflare.WiFiModule.model.UserInfo;
 
 public class ProtocolManager {
 	
-	
-
-	
 	public static JSONObject createOnConnectionMessage(UserInfo info) throws JSONException {
 		JSONObject object = new JSONObject();
 		object.put(Constants.KEY_ACTION, Constants.ACTION_CONNECT);

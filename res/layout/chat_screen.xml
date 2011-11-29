@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+	
+    <EditText android:id="@+id/messageBox"
+        android:lines="2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Your Message"
+        />
+    <Spinner android:id="@+id/receiverSpinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/messageBox"
+        />
+    <Button android:id="@+id/sendMessageButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Send Message"
+        android:enabled="false"
+        android:layout_below="@id/receiverSpinner"/>
+    <TextView android:id="@+id/previousMessages"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/sendMessageButton"
+        android:gravity="top|left"/>
+</RelativeLayout>
