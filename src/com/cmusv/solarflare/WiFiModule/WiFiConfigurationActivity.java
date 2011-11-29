@@ -28,7 +28,7 @@ import android.widget.Toast;
 public class WiFiConfigurationActivity extends ListActivity {
 	
 	public static final String EXTRA_SSID_NAME = "SSIDName"; 
-	private ArrayAdapter<UserInfo> mAdapter;
+	public static ArrayAdapter<UserInfo> mAdapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,8 @@ public class WiFiConfigurationActivity extends ListActivity {
 			 * TODO: Ask a user to enter his username
 			 */
 			
-			notifyWifiServer("sandy");
+			notifyWifiServer("sandy");	// Chinmay <-- Need to do dialog boxes to get user name and give them as input to this function
+			startWiFiMessageHandler();
 			
 			/*
 			 *  mAdapter list is automatically added by calling
@@ -79,7 +80,16 @@ public class WiFiConfigurationActivity extends ListActivity {
 	
 	
 	
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
+    private void startWiFiMessageHandler() {
+		// TODO Auto-generated method stub
+		Intent notifyIntent = new Intent(this,SolarFlareIntentService.class);
+		notifyIntent.putExtra(Constants.KEY_ACTION, Constants.KEY_START_WIFI_MESSAGE_HANDLER);
+		startService(notifyIntent);
+	}
+
+
+
+	private BroadcastReceiver receiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -94,9 +104,8 @@ public class WiFiConfigurationActivity extends ListActivity {
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
 		UserInfo userInfo = (UserInfo) getListAdapter().getItem(position);
-		Intent notifyIntent = new Intent(this,SolarFlareIntentService.class);
-		notifyIntent.putExtra("action", "usermessage");
-		notifyIntent.putExtra("userid", userInfo.getUserId());
+		Intent notifyIntent = new Intent(this,MessageScreen.class);
+		notifyIntent.putExtra(Constants.KEY_USERID, userInfo.getUserId());
 		startService(notifyIntent);
 		
 	}
@@ -119,8 +128,8 @@ public class WiFiConfigurationActivity extends ListActivity {
 	private void notifyWifiServer(String username) {
 		// TODO Auto-generated method stub
 		Intent notifyIntent = new Intent(this,SolarFlareIntentService.class);
-		notifyIntent.putExtra("action", "onconnection");
-		notifyIntent.putExtra("username", username); // TODO: Ask a user for his username 
+		notifyIntent.putExtra(Constants.KEY_ACTION, Constants.KEY_ON_CONNECTION);
+		notifyIntent.putExtra(Constants.KEY_USERNAME, username); // TODO: Ask a user for his username 
 		startService(notifyIntent);
 	}
 
