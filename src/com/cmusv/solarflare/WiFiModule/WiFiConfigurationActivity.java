@@ -57,32 +57,6 @@ public class WiFiConfigurationActivity extends Activity {
 		} else {
 			enableButton(username);
 		}
-		
-//		try {
-//
-//			/*
-//			 * TODO: Ask a user to enter his username
-//			 */
-//			
-//			notifyWifiServer("sandy");	// Chinmay <-- Need to do dialog boxes to get user name and give them as input to this function
-//			startWiFiMessageHandler();
-//			
-//			/*
-//			 *  mAdapter list is automatically added by calling
-//			 *  callbacks addUserToList() and removeUserFromList()
-//			 */
-//			
-//			// TODO: Below dummy additions must be removed
-//			mAdapter.add(new UserInfo("Maneesh", "Maneesh"));
-//			mAdapter.add(new UserInfo("sandy", "sandy"));
-//			mAdapter.add(new UserInfo("buzzy", "buzzy"));
-//			
-//		
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
 	}
 
 	private void enableButton(String username) {
@@ -104,61 +78,6 @@ public class WiFiConfigurationActivity extends Activity {
 			enableButton(username);
 		}
 	}
-	
-	
-	
-//    private void startWiFiMessageHandler() {
-//		// TODO Auto-generated method stub
-//		Intent notifyIntent = new Intent(this,SolarFlareIntentService.class);
-//		notifyIntent.putExtra(Constants.KEY_ACTION, Constants.KEY_START_WIFI_MESSAGE_HANDLER);
-//		startService(notifyIntent);
-//	}
-//
-//
-//
-//	private BroadcastReceiver receiver = new BroadcastReceiver() {
-//
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            // TODO Auto-generated method stub
-//            Toast.makeText(getApplicationContext(), "received", Toast.LENGTH_SHORT);
-//
-//        }
-//    };
-//
-//	@Override
-//	protected void onListItemClick(ListView l, View v, int position, long id) {
-//		// TODO Auto-generated method stub
-//		super.onListItemClick(l, v, position, id);
-//		UserInfo userInfo = (UserInfo) getListAdapter().getItem(position);
-//		Intent notifyIntent = new Intent(this,MessageScreen.class);
-//		notifyIntent.putExtra(Constants.KEY_USERID, userInfo.getUserId());
-//		startService(notifyIntent);
-//		
-//	}
-//	
-//
-//	/*
-//	 * Chinmay:- This is a callback method that adds to list of usernames
-//	 */
-//	void addUsersToList(UserInfo info){
-//		mAdapter.add(info);
-//	}
-//
-//	/*
-//	 * Chinmay:- This is a callback method that removes from list of usernames
-//	 */
-//	void removeAllUsersFromList(UserInfo info){
-//		mAdapter.remove(info);
-//	}
-//	
-//	private void notifyWifiServer(String username) {
-//		// TODO Auto-generated method stub
-//		Intent notifyIntent = new Intent(this,SolarFlareIntentService.class);
-//		notifyIntent.putExtra(Constants.KEY_ACTION, Constants.KEY_ON_CONNECTION);
-//		notifyIntent.putExtra(Constants.KEY_USERNAME, username); // TODO: Ask a user for his username 
-//		startService(notifyIntent);
-//	}
 
 }
 

@@ -36,11 +36,7 @@ public class UserDialogActivity extends Activity implements TextWatcher {
 		});
 	}
 
-	@Override
-	protected void onStart() {
-		super.onStart();
-	}
-
+	
 	@Override
 	public void afterTextChanged(Editable s) {
 		mSubmitButton.setEnabled(s.length() != 0);

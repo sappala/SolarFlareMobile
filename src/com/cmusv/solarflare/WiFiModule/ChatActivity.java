@@ -1,11 +1,15 @@
 package com.cmusv.solarflare.WiFiModule;
 
-import com.cmusv.solarflare.WiFiModule.model.UserInfo;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -13,6 +17,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.cmusv.solarflare.WiFiModule.constant.SharedPrefConstant;
+import com.cmusv.solarflare.WiFiModule.model.UserInfo;
+import com.cmusv.solarflare.WiFiModule.util.Constants;
+import com.cmusv.solarflare.WiFiModule.util.ProtocolManager;
 
 public class ChatActivity extends Activity implements TextWatcher {
 
@@ -45,6 +54,27 @@ public class ChatActivity extends Activity implements TextWatcher {
 				mMessageBox.setText("");
 			}
 		});
+		
+		sendInitialConnectionMessage();
+	}
+
+	private void sendInitialConnectionMessage() {
+		SharedPreferences settings = getSharedPreferences(SharedPrefConstant.PREF_NAME, 0);
+		String username = settings.getString(SharedPrefConstant.USERNAME, null);
+		UserInfo info = new UserInfo(username, System.currentTimeMillis() + "");
+		try {
+			JSONObject connectionMessage = ProtocolManager.createOnConnectionMessage(info);
+			sendDataToIntentService(connectionMessage.toString());
+		} catch (JSONException e) {
+			Log.e(Constants.LOG_TAG, "Could not construct connection message");
+		}
+	}
+
+	private void sendDataToIntentService(String data) {
+		Intent intent = new Intent(ChatActivity.this, SolarFlareIntentService.class);
+		intent.setAction(SolarFlareIntentService.ACTION_SEND_DATA);
+		intent.putExtra(SolarFlareIntentService.EXTRA_DATA, data);
+		startService(intent);
 	}
 
 	private void sendMessage(String string, UserInfo selectedItem) {
