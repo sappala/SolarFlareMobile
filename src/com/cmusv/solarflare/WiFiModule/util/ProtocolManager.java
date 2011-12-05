@@ -1,6 +1,7 @@
 package com.cmusv.solarflare.WiFiModule.util;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -8,7 +9,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Base64;
+import android.util.Log;
 
+import com.cmusv.solarflare.WiFiModule.ChatActivity;
 import com.cmusv.solarflare.WiFiModule.model.Message;
 import com.cmusv.solarflare.WiFiModule.model.UserInfo;
 
@@ -32,6 +35,7 @@ public class ProtocolManager {
 		for(int i=0; i<users.length(); i++) {
 			JSONObject jsonObj = users.getJSONObject(i);
 			info.add(new UserInfo(jsonObj.getString(Constants.KEY_USERNAME), jsonObj.getString(Constants.KEY_USERID)));
+			Log.d(Constants.LOG_TAG, "user name " + ChatActivity.userList.get(i).getUserName());
 		}
 		return info;
 	}
@@ -54,6 +58,6 @@ public class ProtocolManager {
 
 		return object;
 	}
-	
+
 
 }

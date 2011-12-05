@@ -3,6 +3,7 @@ package com.cmusv.solarflare.WiFiModule;
 import java.util.List;
 
 import com.cmusv.solarflare.WiFiModule.constant.SharedPrefConstant;
+import com.cmusv.solarflare.WiFiModule.util.CommunicationHandler;
 
 import android.app.Activity;
 import android.content.Context;
@@ -27,7 +28,7 @@ public class WiFiConfigurationActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
+		//CommunicationHandler.getInstance();
 		mStartChatButton = (Button) findViewById(R.id.startChatButton);
 		mStartChatButton.setOnClickListener(new OnClickListener() {
 			@Override

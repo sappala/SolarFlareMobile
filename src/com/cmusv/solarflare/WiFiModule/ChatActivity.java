@@ -1,5 +1,9 @@
 package com.cmusv.solarflare.WiFiModule;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -29,6 +33,9 @@ public class ChatActivity extends Activity implements TextWatcher {
 	private Button mSendButton;
 	private EditText mMessageBox;
 	private TextView mPreviousMessagesText;
+	private Button updateLsitButton;
+	
+	public static List<UserInfo> userList= new ArrayList<UserInfo>(); 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +46,28 @@ public class ChatActivity extends Activity implements TextWatcher {
 		mSendButton = (Button) findViewById(R.id.sendMessageButton);
 		mMessageBox = (EditText) findViewById(R.id.messageBox);
 		mPreviousMessagesText = (TextView) findViewById(R.id.previousMessages);
+		updateLsitButton = (Button) findViewById(R.id.updateList);
 		
 		ArrayAdapter<UserInfo> info = new ArrayAdapter<UserInfo>(ChatActivity.this, android.R.layout.simple_spinner_item);
 		info.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		mReceiversSpinner.setAdapter(info);
 		getSpinnerAdapter().add(new UserInfo("All", "All"));
+		
+		updateLsitButton.setOnClickListener(
+				new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						getSpinnerAdapter().clear();
+						getSpinnerAdapter().add(new UserInfo("All", "All"));
+
+						for (int i=0; i < userList.size(); i++){
+							Log.d(Constants.LOG_TAG, "user name" + userList.get(i));
+							getSpinnerAdapter().add(userList.get(i));
+						}
+					}
+				});
 		
 		mMessageBox.addTextChangedListener(this);
 		
@@ -54,6 +78,8 @@ public class ChatActivity extends Activity implements TextWatcher {
 				mMessageBox.setText("");
 			}
 		});
+		
+		
 		
 		sendInitialConnectionMessage();
 	}

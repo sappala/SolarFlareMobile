@@ -10,10 +10,16 @@
         android:layout_height="wrap_content"
         android:hint="Your Message"
         />
+    <Button android:id="@+id/updateList"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Update List"
+        android:enabled="true"
+        android:layout_below="@id/messageBox"/>
     <Spinner android:id="@+id/receiverSpinner"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/messageBox"
+        android:layout_below="@id/updateList"
         />
     <Button android:id="@+id/sendMessageButton"
         android:layout_width="fill_parent"
