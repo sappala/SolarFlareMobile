@@ -40,13 +40,13 @@ public class WiFiConfigurationActivity extends Activity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+		/*WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 		List<WifiConfiguration> scanResults = wifi.getConfiguredNetworks();
 		
 		for(WifiConfiguration result : scanResults) {
 			if(result.SSID.equals(getResources().getString(R.string.preconfiguredSSID)));
 				wifi.enableNetwork(result.networkId, true);
-		}
+		}*/
 		
 		SharedPreferences settings = getSharedPreferences(SharedPrefConstant.PREF_NAME, 0);
 		String username = settings.getString(SharedPrefConstant.USERNAME, null);
