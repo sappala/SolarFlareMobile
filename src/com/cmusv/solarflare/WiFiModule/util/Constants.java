@@ -19,5 +19,7 @@ public interface Constants {
 	String KEY_REMOVE_USER		="removeuser";
 	String KEY_ON_CONNECTION	="onconnection";
 	String KEY_START_WIFI_MESSAGE_HANDLER="startWiFiMessageHandler";
+	String KEY_TEST_MESSAGE_SEND = "testmessagesend";
+	String KEY_TEST_MESSAGE_RECEIVE = "testmessagereceive";
 	
 }

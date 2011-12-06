@@ -1,5 +1,6 @@
 package com.cmusv.solarflare.WiFiModule;
 
+import java.util.Currency;
 import java.util.List;
 
 import org.json.JSONException;
@@ -66,6 +67,18 @@ public class ChatActivity extends Activity implements TextWatcher {
 				}
 			} else if(intent.getAction().equals(ACTION_MESSAGE)) {
 				Message message = intent.getParcelableExtra(EXTRA_MESSAGE);
+				if (message.getMessage().equals(Constants.KEY_TEST_MESSAGE_SEND)){
+					String senderId = message.getSenderId();
+					message.setSenderId(message.getReceiverId());
+					message.setReceiverId(senderId);
+					message.setMessage(Constants.KEY_TEST_MESSAGE_RECEIVE);
+					sendMessage(message);
+					return;
+				}
+				else if (message.getMessage().equals(Constants.KEY_TEST_MESSAGE_RECEIVE)){
+					message.setMessage("System.currentTimeMillis() : receive " + System.currentTimeMillis());
+				}
+					
 				String text = getNameForId(message.getSenderId()) + " says: " + message.getMessage() + "\n" + mPreviousMessagesText.getText();
 				mPreviousMessagesText.setText(text);
 			}
@@ -93,6 +106,9 @@ public class ChatActivity extends Activity implements TextWatcher {
 			public void onClick(View v) {
 				if(getSpinnerAdapter().getCount() == 0)
 					return;
+				if (mMessageBox.getText().toString().equals(Constants.KEY_TEST_MESSAGE_SEND)){
+					mPreviousMessagesText.setText("System.currentTimeMillis() : send " + System.currentTimeMillis());
+				}
 				sendMessage(mMessageBox.getText().toString(), (UserInfo)mReceiversSpinner.getSelectedItem());
 				mMessageBox.setText("");
 			}
@@ -139,6 +155,21 @@ public class ChatActivity extends Activity implements TextWatcher {
 		}
 	}
 
+	
+	private void sendMessage(Message message) {
+
+		JSONObject json;
+		try {
+			json = ProtocolManager.createMessage(message);
+			Intent intent = new Intent(ChatActivity.this, SolarFlareIntentService.class);
+			intent.setAction(SolarFlareIntentService.ACTION_SEND_DATA);
+			intent.putExtra(SolarFlareIntentService.EXTRA_DATA, json.toString());
+			startService(intent);
+		} catch (JSONException e) {
+			Log.d(Constants.LOG_TAG, "JSON exception while contructing message to send");
+		}
+	}
+	
 	private String savedUserId() {
 		return getSharedPreferences(SharedPrefConstant.PREF_NAME, 0).getString(SharedPrefConstant.USERNAME_ID, "Anonymous");
 	}
