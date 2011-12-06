@@ -1,6 +1,9 @@
 package com.cmusv.solarflare.WiFiModule.model;
 
-public class UserInfo {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class UserInfo implements Parcelable {
 	private String userName;
 	private String userId;
 	
@@ -30,8 +33,6 @@ public class UserInfo {
 
 	@Override
 	public boolean equals(Object o) {
-		// TODO Auto-generated method stub
-		
 		if(o instanceof UserInfo)
 			if(userId.equals(((UserInfo) o).userId))
 				return true;
@@ -39,5 +40,33 @@ public class UserInfo {
 		return false;
 		
 	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(userName);
+		dest.writeString(userId);
+	}
 	
+	public static final Parcelable.Creator<UserInfo> CREATOR = new Parcelable.Creator<UserInfo>() {
+
+		@Override
+		public UserInfo createFromParcel(Parcel source) {
+			return new UserInfo(source);
+		}
+
+		@Override
+		public UserInfo[] newArray(int size) {
+			return new UserInfo[size];
+		}
+	};
+	
+	private UserInfo(Parcel source) {
+		userName = source.readString();
+		userId   = source.readString();
+	}
 }

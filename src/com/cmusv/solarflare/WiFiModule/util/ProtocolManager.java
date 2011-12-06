@@ -7,8 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Base64;
-
 import com.cmusv.solarflare.WiFiModule.model.Message;
 import com.cmusv.solarflare.WiFiModule.model.UserInfo;
 
@@ -38,8 +36,8 @@ public class ProtocolManager {
 	
 	public static Message parseMessage(JSONObject messageJSON) throws JSONException {
 		Message message = new Message();
-		byte[] decodedBytes = Base64.decode(messageJSON.getString(Constants.KEY_MESSAGE).getBytes(), Base64.DEFAULT);
-		message.setMessage(new String(decodedBytes));
+		//byte[] decodedBytes = Base64.decode(messageJSON.getString(Constants.KEY_MESSAGE).getBytes(), Base64.DEFAULT);
+		message.setMessage(messageJSON.getString(Constants.KEY_MESSAGE));
 		message.setSenderId(messageJSON.getString(Constants.KEY_SENDER_USERID));
 		message.setReceiverId(messageJSON.getString(Constants.KEY_RECEIVER_USERID));
 		return message;
@@ -50,7 +48,7 @@ public class ProtocolManager {
 		object.put(Constants.KEY_ACTION, Constants.KEY_USER_MESSAGE);
 		object.put(Constants.KEY_SENDER_USERID, message.getSenderId());
 		object.put(Constants.KEY_RECEIVER_USERID, message.getReceiverId());
-		object.put(Constants.KEY_MESSAGE, Base64.encode(message.toString().getBytes(), Base64.DEFAULT));
+		object.put(Constants.KEY_MESSAGE, message.toString());
 
 		return object;
 	}
