@@ -76,9 +76,9 @@ public class CommunicationHandler {
 				List<UserInfo> userInfos = ProtocolManager.parseUserInfoMessage(json);
 				mCallback.broadCastUserInfo(userInfos);
 			} else if(messageAction.equals(Constants.KEY_REMOVE_USER)) {
-					Log.d(Constants.LOG_TAG, "Adding user");
+					Log.d(Constants.LOG_TAG, "Removing user");
 					List<UserInfo> userInfos = ProtocolManager.parseUserInfoMessage(json);
-					mCallback.broadCastUserInfo(userInfos);
+					mCallback.broadCastRemoveUserInfo(userInfos);
 			} else if(messageAction.equals(Constants.KEY_USER_MESSAGE)) {
 				Log.d(Constants.LOG_TAG, "Receiving message");
 				Message message = ProtocolManager.parseMessage(json);
