@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -104,9 +105,13 @@ public class ChatActivity extends Activity implements TextWatcher {
 	private void sendInitialConnectionMessage() {
 		SharedPreferences settings = getSharedPreferences(SharedPrefConstant.PREF_NAME, 0);
 		String username = settings.getString(SharedPrefConstant.USERNAME, null);
-		long currentTimeMillis = System.currentTimeMillis();
-		UserInfo info = new UserInfo(username, currentTimeMillis + "");
-		getSharedPreferences(SharedPrefConstant.PREF_NAME, 0).edit().putString(SharedPrefConstant.USERNAME_ID, currentTimeMillis + "").commit();
+		
+		//long currentTimeMillis = System.currentTimeMillis();
+		TelephonyManager tManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+		String uuid = tManager.getDeviceId();
+		
+		UserInfo info = new UserInfo(username, uuid + "");
+		getSharedPreferences(SharedPrefConstant.PREF_NAME, 0).edit().putString(SharedPrefConstant.USERNAME_ID, uuid + "").commit();
 		try {
 			JSONObject connectionMessage = ProtocolManager.createOnConnectionMessage(info);
 			sendDataToIntentService(connectionMessage.toString());
